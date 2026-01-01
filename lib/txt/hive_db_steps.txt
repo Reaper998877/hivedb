@@ -1,0 +1,54 @@
+Step 1 : Add dependencies in pubspec.yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  cupertino_icons: ^1.0.8
+
+  hive: ^2.0.5
+  hive_flutter: ^1.1.0
+  intl: ^0.18.0
+  table_calendar: ^3.0.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  hive_generator: ^1.1.3
+  build_runner: ^2.4.6
+
+
+
+Step 2 : Create model. (Here person_model.dart)
+# Model is necessary for organizing data in hive db.
+See person_model.dart (Change according to requirements)
+
+
+
+Step 3 : Open Terminal and run below command 
+command => flutter packages pub run build_runner build
+
+'modelname.g.dart' file will be created in the same directory, where the model file is.
+Here it is person_model.g.dart
+
+
+
+Step 4 : In main.dart file write below code
+
+void main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(PersonAdapter()); // PersonAdapter from modelname.g.dart file
+  await Hive.openBox<Person>('persons'); // Person from model file
+  runApp(MyApp());
+}
+
+
+
+Step 5 : Create Controller to perform CRUD operations.
+See person_controller.dart
+
+
+
+Step 6 : Using controller.
+See person_screen.dart
+
